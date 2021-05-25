@@ -27,14 +27,6 @@ namespace Template
             get => hitBox;
         }
 
-        public BaseClass(Texture2D texture, Vector2 texturePos, float angle)
-        {
-            this.texture = texture;
-            this.texturePos = texturePos;
-            this.angle = angle;
-            this.mousePos = Vector2.Zero;
-        }
-
         public BaseClass(Texture2D texture, Vector2 texturePos, float angle, Vector2 mousePos)
         {
             this.texture = texture;

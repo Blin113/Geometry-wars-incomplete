@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Template
 {
-    class Swarmer : BaseEnemy
+    class Swarmer : BaseObject
     {
         private List<Swarmer> swarmers = new List<Swarmer>();
 

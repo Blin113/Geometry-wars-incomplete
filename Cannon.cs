@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Template
 {
-    class Cannon : BaseEnemy
+    class Cannon : BaseObject
     {
         private List<Cannon> cannons = new List<Cannon>();
 

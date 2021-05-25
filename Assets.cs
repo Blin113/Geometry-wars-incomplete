@@ -12,6 +12,8 @@ namespace Template
         
         public static Texture2D Croshair { get; private set; }
 
+        public static Texture2D PowerUp { get; private set; }
+
         public static Texture2D Player { get; private set; }
 
         public static Texture2D BulletTexture { get; private set; }
@@ -28,6 +30,8 @@ namespace Template
             MenuFont = content.Load<SpriteFont>("Menu");
 
             Croshair = content.Load<Texture2D>("croshair");
+
+            PowerUp = content.Load<Texture2D>("PowerUp");
 
             PauseScreen = content.Load<Texture2D>("PauseScreen");
 

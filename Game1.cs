@@ -56,6 +56,11 @@ namespace Template
         private List<Swarmer> swarmers = new List<Swarmer>();
         private List<Cannon> cannons = new List<Cannon>();
 
+        //PowerUps
+        private PowerUpSpawner powerUpSpawner;
+
+        private List<WeaponPowerUp> WeaponPowerUps = new List<WeaponPowerUp>();
+
 
 
         //KOmentar
@@ -88,6 +93,8 @@ namespace Template
             camera = new Camera(GraphicsDevice.Viewport);
             
             enemySpawner = new EnemySpawner(swarmers, cannons, bullets1);
+
+            powerUpSpawner = new PowerUpSpawner(WeaponPowerUps);
             
             base.Initialize();
         }
@@ -158,7 +165,14 @@ namespace Template
                     item.Update(camera);
                 }
 
+                foreach(WeaponPowerUp item in WeaponPowerUps)
+                {
+                    item.Update(camera);
+                }
+
                 enemySpawner.Update(gameTime);
+
+                powerUpSpawner.Update(gameTime);
 
                 Collision();
 
@@ -195,6 +209,11 @@ namespace Template
                 }
 
                 foreach (Cannon item in cannons)        //rita ut fiender
+                {
+                    item.Draw(spriteBatch);
+                }
+
+                foreach (WeaponPowerUp item in WeaponPowerUps)
                 {
                     item.Draw(spriteBatch);
                 }

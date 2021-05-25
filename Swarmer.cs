@@ -20,13 +20,6 @@ namespace Template
         {
             angle = (float)Math.Atan2(texturePos.Y - Player.CurrentPlayerPos.Y, texturePos.X - Player.CurrentPlayerPos.X) + (float)(Math.PI);
 
-            /*
-            if (rnd.Next(0, 100) <= 1)
-            {
-                weaponHandler.Shoot(texturePos, angle, new Vector2(), new Point(), mousePos, DamageOrigin.enemy);
-            }
-            */
-
             hitBox.Location = texturePos.ToPoint();
 
             SearchAndDestroy();

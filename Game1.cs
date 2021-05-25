@@ -51,6 +51,7 @@ namespace Template
 
         //Enemies
         private EnemySpawner enemySpawner;
+        private Cannon cannon;
 
         private List<Swarmer> swarmers = new List<Swarmer>();
         private List<Cannon> cannons = new List<Cannon>();
@@ -62,6 +63,8 @@ namespace Template
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Window.Title = "Geometry Wars";
+
             IsMouseVisible = false;
             /*
             graphics.PreferredBackBufferWidth = 1990;
@@ -102,10 +105,14 @@ namespace Template
             player = new Player(Assets.Player, texturePos, angle, mousePos);
             menu = new Menu(player);
 
+            cannon = new Cannon(Assets.Enemy, texturePos, angle, weaponHandler);
+
             // TODO: use this.Content to load your game content here 
 
             weaponHandler = new WeaponHandler(bullets1);
             player.SetWeaponHandler(weaponHandler);
+            cannon.SetEnemyWeaponHandler(weaponHandler);
+            
 
             camera.SetTarget(player);
         }
@@ -257,10 +264,26 @@ namespace Template
 
             for (int i = 0; i < bullets1.Count; i++)
             {
+                for (int j = 0; j < cannons.Count; j++)
+                {
+                    if (bullets1[i].GetDamageOrigin == DamageOrigin.player && cannons[j].HitBox.Intersects(bullets1[i].HitBox))
+                    {
+                        cannons.RemoveAt(j);
+                        bullets1.RemoveAt(i);
+                        highScore++;
+                        i--;
+                        j--;
+                        break;
+                    }
+                }
+            }
+
+            for (int i = 0; i < bullets1.Count; i++)
+            {
                 if (bullets1[i].GetDamageOrigin == DamageOrigin.enemy && player.HitBox.Intersects(bullets1[i].HitBox))
                 {
                     bullets1.RemoveAt(i);
-                    player.Collision(bullets1[i]);
+                    player.Collision(null, bullets1[i]);
                     i--;
                 }
             }
@@ -269,7 +292,7 @@ namespace Template
             {
                 if (swarmers[i].HitBox.Intersects(player.HitBox))
                 {
-                    player.Collision(swarmers[i]);
+                    player.Collision(swarmers[i], null);
                     swarmers.RemoveAt(i);
                     i--;
                 }

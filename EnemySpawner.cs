@@ -44,7 +44,11 @@ namespace Template
             if (swarmers.Count < maxEnemies)
             {
                 swarmers.Add(new Swarmer(Assets.Enemy, new Vector2(x, y), 0));
-                cannons.Add(new Cannon(Assets.Enemy, new Vector2(x, y), 0));
+            }
+
+            if (cannons.Count < maxEnemies)
+            {
+                cannons.Add(new Cannon(Assets.Enemy, new Vector2(x, y), 0, new WeaponHandler(bullets)));
             }
 
             EnemyLimit();
